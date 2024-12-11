@@ -1,3 +1,3 @@
-export const isNotNumber = (numString: string): boolean => {
-  return isNaN(Number(numString));
+export const isNotNumber = (argument: any): boolean => {
+  return isNaN(Number(argument));
 };
