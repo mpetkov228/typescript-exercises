@@ -15,14 +15,14 @@ app.get('/hello', (_req, res) => {
 });
 
 app.get('/bmi', (req, res) => {
-  const height = Number(req.query.height);
-  const weight = Number(req.query.weight);
+  const height = req.query.height;
+  const weight = req.query.weight;
 
   if (!isNotNumber(height) && !isNotNumber(weight)) {
       const result = calculateBmi(Number(height), Number(weight));
       res.json({
-        height,
-        weight,
+        height: Number(height),
+        weight: Number(weight),
         bmi: result
       });
   } else {
