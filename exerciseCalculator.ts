@@ -31,7 +31,7 @@ const parseArguments = (args: string[]): ExerciseValues => {
   };
 };
 
-const calculateExercises = (dailyHours: number[], target: number): Result => {
+export const calculateExercises = (dailyHours: number[], target: number): Result => {
   const periodLength = dailyHours.length;
   const trainingDays = dailyHours.filter(d => d !== 0).length;
   const hoursSum = dailyHours.reduce((a, d) => a + d, 0);
@@ -62,13 +62,15 @@ const calculateExercises = (dailyHours: number[], target: number): Result => {
   };
 };
 
-try {
-  const { target, dailyHours } = parseArguments(process.argv);
-  console.log(calculateExercises(dailyHours, target));
-} catch (error: unknown) {
-  let errorMessage = 'Something went wrong.';
-  if (error instanceof Error) {
-    errorMessage += ' Error: ' + error.message;
+if (require.main === module) {
+  try {
+    const { target, dailyHours } = parseArguments(process.argv);
+    console.log(calculateExercises(dailyHours, target));
+  } catch (error: unknown) {
+    let errorMessage = 'Something went wrong.';
+    if (error instanceof Error) {
+      errorMessage += ' Error: ' + error.message;
+    }
+    console.log(errorMessage);
   }
-  console.log(errorMessage);
 }
